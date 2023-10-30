@@ -4,12 +4,6 @@ html, body, #camera {
   height: 100%;
   width: 100%;
 }
-#tirafoto{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
 #tirafoto, #camera--view{
   height: 80%;
   width: 60%;
