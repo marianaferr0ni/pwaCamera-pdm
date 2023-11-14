@@ -57,4 +57,27 @@ function displayFotos () {
   });
 }
 
+const switchCameraButton = document.querySelector("#switch-camera-button");
+switchCameraButton.addEventListener("click", async () => {
+  if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoInputs = devices.filter((device) => device.kind === "videoinput");
+
+      if (videoInputs.length >= 2) {
+        const currentCamera = constraints.video.facingMode;
+        constraints.video.facingMode = currentCamera === "user" ? "environment" : "user";
+        cameraStart();
+      } else {
+        alert("Não há câmeras disponíveis para alternar.");
+      }
+    } catch (error) {
+        console.error("Erro ao alternar entre as câmeras:", error);
+    }
+  } 
+  else {
+    alert("Seu navegador não suporta a troca de câmera.");
+  }
+});
+
 window.addEventListener("load", cameraStart, false);
